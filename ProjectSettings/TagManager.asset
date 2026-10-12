@@ -2,7 +2,7 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!78 &1
 TagManager:
-  serializedVersion: 2
+  serializedVersion: 3
   tags: []
   layers:
   - Default
@@ -11,10 +11,10 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
+  - Bird
+  - Block
+  - Pig
+  - Ground
   - 
   - 
   - 
@@ -41,3 +41,23 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 3279667755
+    locked: 0
+  - name: Ground
+    uniqueID: 3609206653
+    locked: 0
+  - name: Blocks
+    uniqueID: 2679782275
+    locked: 0
+  - name: Characters
+    uniqueID: 1807793285
+    locked: 0
+  - name: Effects
+    uniqueID: 2105591899
+    locked: 0
+  - name: UI
+    uniqueID: 3927207409
+    locked: 0
+  m_RenderingLayers:
+  - Default
