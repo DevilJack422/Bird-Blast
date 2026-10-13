@@ -11,6 +11,8 @@ public class Slingshot : MonoBehaviour
     [SerializeField] private float launchPower = 8f;
     [SerializeField] private int trajectoryPoints = 25;
     [SerializeField] private float trajectorySteps = 0.08f;
+    [SerializeField] private AudioClip slingshotStretch;
+    [SerializeField] private AudioClip slingshotSnap;
 
     Camera cam;
     bool dragging;
@@ -33,6 +35,7 @@ public class Slingshot : MonoBehaviour
         {
             var hit = Physics2D.OverlapPoint(pointer);
             dragging = hit != null && hit.GetComponent<Bird>() == bird;
+            if (dragging) AudioManager.Instance.PlaySFX(SfxId.SlingStretch);
         }
 
         if (dragging)
@@ -47,6 +50,7 @@ public class Slingshot : MonoBehaviour
         if (dragging && Pointer.current.press.wasReleasedThisFrame)
         {
             dragging = false;
+            AudioManager.Instance.PlaySFX(SfxId.SlingRelease);
             Vector2 pos = bird.transform.position;
             bird.Launch(GetLaunchVelocity(pos));
             UpdateBands(anchor.position);
