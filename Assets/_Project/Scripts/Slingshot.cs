@@ -1,11 +1,14 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Slingshot : MonoBehaviour
 {
+    public event Action<Bird> OnBirdLaunch;
+    public Transform Anchor => anchor;
+    
     [Header("-----Slingshot Setting-----")]
     [SerializeField] private Transform anchor;
-    [SerializeField] private Bird bird;
     [SerializeField] private LineRenderer bandFont, bandBack, trajectory;
     [SerializeField] private float maxDrag = 2f;
     [SerializeField] private float launchPower = 8f;
@@ -14,8 +17,9 @@ public class Slingshot : MonoBehaviour
     [SerializeField] private AudioClip slingshotStretch;
     [SerializeField] private AudioClip slingshotSnap;
 
-    Camera cam;
-    bool dragging;
+    private Camera cam;
+    private bool dragging;
+    private Bird bird;
 
     void Awake()
     {
@@ -51,15 +55,20 @@ public class Slingshot : MonoBehaviour
         {
             dragging = false;
             AudioManager.Instance.PlaySFX(SfxId.SlingRelease);
-            Vector2 pos = bird.transform.position;
-            bird.Launch(GetLaunchVelocity(pos));
+
+            Bird launched = bird;
+            launched.Launch(GetLaunchVelocity(launched.transform.position));
+            bird = null;
+            trajectory.positionCount = 0;
             UpdateBands(anchor.position);
+
+            OnBirdLaunch?.Invoke(launched);
         }
     }
 
     Vector2 GetLaunchVelocity(Vector2 birdPos) => ((Vector2)anchor.position - birdPos) * launchPower;
 
-    void UpdateBands(Vector3 birdPos)
+    private void UpdateBands(Vector3 birdPos)
     {
         bandFont.SetPosition(0, anchor.position + Vector3.left * 0.2f);
         bandFont.SetPosition(1, birdPos);
@@ -67,7 +76,7 @@ public class Slingshot : MonoBehaviour
         bandBack.SetPosition(1, birdPos);
     }
 
-    void DrawTrajectory(Vector2 start, Vector2 v0)
+    private void DrawTrajectory(Vector2 start, Vector2 v0)
     {
         trajectory.positionCount = trajectoryPoints;
         Vector2 g = bird.GravityVector;
@@ -76,5 +85,12 @@ public class Slingshot : MonoBehaviour
             float t = i * trajectorySteps;
             trajectory.SetPosition(i, start + v0 * t + 0.5f * g * t * t);
         }
+    }
+
+    public void LoadBird(Bird b)
+    {
+        bird = b;
+        bird.transform.position = anchor.position;
+        UpdateBands(anchor.position);
     }
 }
