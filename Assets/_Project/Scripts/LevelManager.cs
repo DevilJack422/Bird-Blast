@@ -14,6 +14,8 @@ public class LevelManager : MonoBehaviour
 
     private readonly Queue<Bird> queue = new();
 
+    private int pigsAlive;
+
     void Start()
     {
         foreach (var prefab in birdPrefabs)
@@ -24,9 +26,24 @@ public class LevelManager : MonoBehaviour
         slingshot.OnBirdLaunch += HandleLaunched;
         RepositionQueue();
         LoadNext();
+
+        pigsAlive = FindObjectsByType<Pig>(FindObjectsSortMode.None).Length;
+        Destructible.Destroyed += OnAnyDestroyed;
     }
 
-    void OnDestroy() => slingshot.OnBirdLaunch -= HandleLaunched;
+    void OnDestroy()
+    {
+        slingshot.OnBirdLaunch -= HandleLaunched;
+        Destructible.Destroyed -= OnAnyDestroyed;
+    }
+
+    private void OnAnyDestroyed(Destructible d)
+    {
+        if (d is Pig && --pigsAlive <= 0)
+        {
+            Debug.Log("Out of pigs, WIN!");
+        }
+    }
 
     private void LoadNext()
     {
@@ -38,7 +55,7 @@ public class LevelManager : MonoBehaviour
         Bird next = queue.Dequeue();
         RepositionQueue();
         StartCoroutine(HopToSling(next));
-    } 
+    }
 
     private IEnumerator HopToSling(Bird bird)
     {

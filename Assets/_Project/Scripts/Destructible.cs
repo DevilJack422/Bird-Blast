@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Destructible : MonoBehaviour
 {
-    public event Action<Destructible> Destroyed;
+    public static event Action<Destructible> Destroyed;
 
     [Header("-----Health & Point-----")]
     [SerializeField] private float maxHealth = 30f;
