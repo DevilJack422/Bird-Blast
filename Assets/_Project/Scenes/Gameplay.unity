@@ -450,7 +450,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 39.71, y: 8.46}
+  m_Size: {x: 30, y: 8.46}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -464,7 +464,7 @@ Transform:
   m_GameObject: {fileID: 273859881}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 31.4, y: 0.68, z: 0}
+  m_LocalPosition: {x: 16.8, y: 0.68, z: 0}
   m_LocalScale: {x: 2.9200003, y: 2.92, z: 2.92}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -1137,7 +1137,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.00859642, y: -3.335254}
+  m_Offset: {x: -0.02345848, y: -3.335254}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1147,7 +1147,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 12.810926, y: 1.7564492}
+  m_Size: {x: 30.022102, y: 1.7564492}
   m_EdgeRadius: 0
 --- !u!1 &873948911
 GameObject:
@@ -1362,7 +1362,7 @@ Transform:
   m_GameObject: {fileID: 986436165}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.620001, y: -2.0500004, z: -10}
+  m_LocalPosition: {x: -15.7, y: -2.0500004, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1380,7 +1380,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f453f694addf4275988fac205bc91968, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineConfiner2D
-  BoundingShape2D: {fileID: 1362982657}
+  BoundingShape2D: {fileID: 1362982659}
   Damping: 0.5
   SlowingDistance: 5
   OversizeWindow:
@@ -1413,7 +1413,7 @@ MonoBehaviour:
       Offset: {x: 0, y: 0}
   CenterOnActivate: 1
   TargetOffset: {x: -1.92, y: 2.08, z: 0}
-  Damping: {x: 10, y: 2, z: 1}
+  Damping: {x: 1.55, y: 1.5, z: 1}
   Lookahead:
     Enabled: 1
     Time: 0
@@ -1512,7 +1512,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1362982658}
-  - component: {fileID: 1362982657}
+  - component: {fileID: 1362982659}
   m_Layer: 0
   m_Name: CameraBounds
   m_TagString: Untagged
@@ -1520,8 +1520,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!61 &1362982657
-BoxCollider2D:
+--- !u!4 &1362982658
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1362982656}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -15.24922, y: 0.2574, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!60 &1362982659
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1554,7 +1569,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 46.44719, y: 0.68718433}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1564,23 +1579,17 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 114.16629, y: 21.959082}
-  m_EdgeRadius: 0
---- !u!4 &1362982658
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1362982656}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -15.24922, y: 0.2574, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Points:
+    m_Paths:
+    - - {x: 1.9762077, y: 12.462001}
+      - {x: -10.863641, y: 12.330732}
+      - {x: -10.99517, y: -0.24514094}
+      - {x: -10.9810705, y: -10.969077}
+      - {x: 74.75918, y: -10.783687}
+      - {x: 74.72293, y: -5.067465}
+      - {x: 74.69358, y: -0.31718594}
+      - {x: 74.90711, y: 11.7750225}
+  m_UseDelaunayMesh: 1
 --- !u!1 &1454343046
 GameObject:
   m_ObjectHideFlags: 0
