@@ -9,7 +9,7 @@ public class Bird : MonoBehaviour
 
     [Header("-----End Turn-----")]
     [SerializeField] private float stopSpeed = 0.3f; // Speed under this number mean stop
-    [SerializeField] private float stopTime = 1f; // How long standing still before it ends
+    [SerializeField] private float stopTime = 1f; // How long standing still before it end 
     [SerializeField] private float maxFlightTime = 8f; // Safe: Flight too long ends
     [SerializeField] private float killY = -10f; // Fall under this point is end
 

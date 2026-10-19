@@ -17,7 +17,6 @@ public class Destructible : MonoBehaviour
     [SerializeField] private float killY = -10f; // Dead when go out of map
 
     [Header("-----UI-----")]
-    [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Sprite[] damageSprite; // Hold damage sprite from normal to destroy
     [SerializeField] private GameObject breakEffect; // Prefab effect
     [SerializeField] private SfxId hitSFX = SfxId.BirdHit;
@@ -27,6 +26,7 @@ public class Destructible : MonoBehaviour
     private float spawnTime;
     private float lastSfxTime;
     private bool isDead;
+    private SpriteRenderer spriteRenderer;
 
     public int PointValue => pointValue;
 
