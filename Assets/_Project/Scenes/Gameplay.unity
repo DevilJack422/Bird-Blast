@@ -1622,51 +1622,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 134867254}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1484000828
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1484000830}
-  - component: {fileID: 1484000829}
-  m_Layer: 0
-  m_Name: Level Music
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1484000829
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1484000828}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6ba92ca86de98f41a02f8040483007b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LevelMusic
-  levelMusic: {fileID: 8300000, guid: e90e452d33a234a4b846112bdd96bfe9, type: 3}
---- !u!4 &1484000830
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1484000828}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.90169, y: -1.43123, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2005438446}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1625287543
 GameObject:
   m_ObjectHideFlags: 0
@@ -1985,7 +1940,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2005438446}
-  - component: {fileID: 2005438445}
+  - component: {fileID: 2005438450}
+  - component: {fileID: 2005438449}
+  - component: {fileID: 2005438448}
+  - component: {fileID: 2005438447}
   m_Layer: 0
   m_Name: Audio Manager
   m_TagString: Untagged
@@ -1993,35 +1951,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2005438445
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2005438444}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75f28534914c35c4596e871d611a816f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AudioManager
-  sFXSource: {fileID: 622884995}
-  musicSource: {fileID: 1945240178}
-  sFXList:
-  - id: 0
-    clip: {fileID: 8300000, guid: e6b4a4ce597924d47b8201fd3063b9da, type: 3}
-    volume: 1
-  - id: 1
-    clip: {fileID: 8300000, guid: b8730da5a036aed4c9f2437c3cb8dc8b, type: 3}
-    volume: 1
-  - id: 3
-    clip: {fileID: 8300000, guid: 01131de66dea8a241b6d468b306e6e71, type: 3}
-    volume: 1
-  - id: 2
-    clip: {fileID: 8300000, guid: 47286387d7eb39a4a933467b53697ae4, type: 3}
-    volume: 1
-  sFXVolume: 1
-  musicVolume: 1
 --- !u!4 &2005438446
 Transform:
   m_ObjectHideFlags: 0
@@ -2037,9 +1966,79 @@ Transform:
   m_Children:
   - {fileID: 1945240179}
   - {fileID: 622884996}
-  - {fileID: 1484000830}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2005438447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2005438444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a633c7603d59cf488f582ad3d8525bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SoundManager
+  soundLibrary: {fileID: 2005438448}
+  soundSource: {fileID: 622884995}
+--- !u!114 &2005438448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2005438444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ed4c2f6749f0bd43b8a21110177c979, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SoundLibrary
+  soundEffects:
+  - groupId: Slingshot
+    clips:
+    - {fileID: 8300000, guid: b8730da5a036aed4c9f2437c3cb8dc8b, type: 3}
+    - {fileID: 8300000, guid: e6b4a4ce597924d47b8201fd3063b9da, type: 3}
+  - groupId: Bird
+    clips:
+    - {fileID: 8300000, guid: 47286387d7eb39a4a933467b53697ae4, type: 3}
+    - {fileID: 8300000, guid: 0ef26fc4735abb045902372a204a8f9f, type: 3}
+  - groupId: Wood
+    clips:
+    - {fileID: 8300000, guid: 01131de66dea8a241b6d468b306e6e71, type: 3}
+    - {fileID: 8300000, guid: 700d3f38b2565c045b955f665d564d08, type: 3}
+  - groupId: Pig
+    clips:
+    - {fileID: 8300000, guid: b150887875a4abc499b012513fe926bb, type: 3}
+--- !u!114 &2005438449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2005438444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 783b1630217b0014cab2bc6320f851df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MusicManager
+  musicLibrary: {fileID: 2005438450}
+  musicSource: {fileID: 1945240178}
+--- !u!114 &2005438450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2005438444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 954061889d1de5942a63824437b5f108, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MusicLibrary
+  tracks:
+  - trackName: Gameplay
+    clip: {fileID: 8300000, guid: e90e452d33a234a4b846112bdd96bfe9, type: 3}
 --- !u!1001 &1328080635816277503
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2088,6 +2087,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6174643626600425188, guid: e4b298bc559c1254087f89c2ce4037e4, type: 3}
+      propertyPath: HitSound
+      value: Pig Hit
+      objectReference: {fileID: 0}
+    - target: {fileID: 6174643626600425188, guid: e4b298bc559c1254087f89c2ce4037e4, type: 3}
+      propertyPath: BreakSound
+      value: Pig Break
+      objectReference: {fileID: 0}
+    - target: {fileID: 6174643626600425188, guid: e4b298bc559c1254087f89c2ce4037e4, type: 3}
+      propertyPath: soundGroup
+      value: Pig
+      objectReference: {fileID: 0}
     - target: {fileID: 9091267760076955674, guid: e4b298bc559c1254087f89c2ce4037e4, type: 3}
       propertyPath: m_Name
       value: Pig
@@ -2105,6 +2116,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2918322044186167914, guid: caa7bf9872713094eadb368c0ca76004, type: 3}
+      propertyPath: HitSound
+      value: Pig Hit
+      objectReference: {fileID: 0}
+    - target: {fileID: 2918322044186167914, guid: caa7bf9872713094eadb368c0ca76004, type: 3}
+      propertyPath: BreakSound
+      value: Pig Break
+      objectReference: {fileID: 0}
+    - target: {fileID: 2918322044186167914, guid: caa7bf9872713094eadb368c0ca76004, type: 3}
+      propertyPath: soundGroup
+      value: Pig
+      objectReference: {fileID: 0}
     - target: {fileID: 8415527360260700581, guid: caa7bf9872713094eadb368c0ca76004, type: 3}
       propertyPath: m_LocalPosition.x
       value: 25.81

@@ -39,7 +39,7 @@ public class Slingshot : MonoBehaviour
         {
             var hit = Physics2D.OverlapPoint(pointer);
             dragging = hit != null && hit.GetComponent<Bird>() == bird;
-            if (dragging) AudioManager.Instance.PlaySFX(SfxId.SlingStretch);
+            if (dragging) SoundManager.Instance.PlaySound("Slingshot", "Band Stretch");
         }
 
         if (dragging)
@@ -54,7 +54,7 @@ public class Slingshot : MonoBehaviour
         if (dragging && Pointer.current.press.wasReleasedThisFrame)
         {
             dragging = false;
-            AudioManager.Instance.PlaySFX(SfxId.SlingRelease);
+            SoundManager.Instance.PlaySound("Slingshot", "Band Snap");
 
             Bird launched = bird;
             launched.Launch(GetLaunchVelocity(launched.transform.position));

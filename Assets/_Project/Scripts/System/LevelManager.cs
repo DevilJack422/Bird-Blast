@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
@@ -18,6 +20,16 @@ public class LevelManager : MonoBehaviour
 
     void Start()
     {
+        string sceneName = SceneManager.GetActiveScene().name;
+        if (sceneName == "Main Menu")
+        {
+            MusicManager.Instance.PlayMusic("Main Menu");
+        }
+        else if (sceneName == "Gameplay")
+        {
+            MusicManager.Instance.PlayMusic("Gameplay Music");
+        }
+
         foreach (var prefab in birdPrefabs)
         {
             queue.Enqueue(Instantiate(prefab, waitPoint.position, Quaternion.identity));

@@ -19,8 +19,11 @@ public class Destructible : MonoBehaviour
     [Header("-----UI-----")]
     [SerializeField] private Sprite[] damageSprite; // Hold damage sprite from normal to destroy
     [SerializeField] private GameObject breakEffect; // Prefab effect
-    [SerializeField] private SfxId hitSFX = SfxId.BirdHit;
-    [SerializeField] private SfxId breakSFX = SfxId.BlockBreak;
+
+    [Header("-----Sound-----")]
+    [SerializeField] private string soundGroup = "Wood";
+    [SerializeField] private string HitSound = "Wood Hit";
+    [SerializeField] private string BreakSound = "Wood Break";
 
     private float health;
     private float spawnTime;
@@ -80,9 +83,9 @@ public class Destructible : MonoBehaviour
     private void PlayHitSound()
     {
         // Limit the frequency, avoid a five-time overlapping hit
-        if (Time.time - lastSfxTime < 0.15f || AudioManager.Instance == null) return;
+        if (Time.time - lastSfxTime < 0.15f || SoundManager.Instance == null) return;
         lastSfxTime = Time.time;
-        AudioManager.Instance.PlaySFX(hitSFX);
+        Play(HitSound);
     }
 
     private void Die()
@@ -92,7 +95,15 @@ public class Destructible : MonoBehaviour
 
         Destroyed?.Invoke(this);
         if (breakEffect != null) Instantiate(breakEffect, transform.position, Quaternion.identity);
-        if (AudioManager.Instance != null) AudioManager.Instance.PlaySFX(breakSFX);
+        Play(BreakSound);
         Destroy(gameObject);
+    }
+
+    private void Play(string soundName)
+    {
+        if (SoundManager.Instance != null)
+        {
+            SoundManager.Instance.PlaySound(soundGroup, soundName);
+        }
     }
 }
