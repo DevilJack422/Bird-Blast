@@ -2,10 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Cinemachine;
-using UnityEditor.Search;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.SocialPlatforms.Impl;
 
 public enum GameState { Playing, Won, Lose }
 
@@ -43,11 +40,6 @@ public class LevelManager : MonoBehaviour
     void Awake()
     {
         birdsLeft = birdPrefabs.Length;
-
-        if (levelData.levelIndex == 1)
-        {
-            MusicManager.Instance.PlayMusic("Gameplay");
-        }
     }
 
     void Start()
