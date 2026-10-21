@@ -1,46 +1,69 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Cinemachine;
+using UnityEditor.Search;
 using UnityEngine;
-using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms.Impl;
+
+public enum GameState { Playing, Won, Lose }
 
 public class LevelManager : MonoBehaviour
 {
-    [SerializeField] private Slingshot slingshot;
+    public event Action<int> OnBirdLeftChanged;
+    public event Action<bool, int, int> OnLevelEnded; // win?, point, starts number
+
+    [Header("-----Level-----")]
+    [SerializeField] private LevelData levelData;
     [SerializeField] private Bird[] birdPrefabs;
     [SerializeField] private Transform waitPoint;
     [SerializeField] private float spacing = 0.8f;
     [SerializeField] private float nextBirdDelay = 1f;
+
+
+    [Header("-----Offset-----")]
+    [SerializeField] private Slingshot slingshot;
     [SerializeField] private CinemachineCamera followCam;
 
+    [Header("-----Physic Delay----")]
+    [SerializeField] private float winSettleDelay = 2f;
+    [SerializeField] private float loseSettleDelay = 3f;
+ 
     private readonly Queue<Bird> queue = new();
 
+    private GameState state = GameState.Playing;
     private int pigsAlive;
+    private int birdsLeft;
+
+    public GameState State => state;
+    public int BirdsLeft => birdsLeft;
+    public LevelData Data => levelData;
+
+    void Awake()
+    {
+        birdsLeft = birdPrefabs.Length;
+
+        if (levelData.levelIndex == 1)
+        {
+            MusicManager.Instance.PlayMusic("Gameplay");
+        }
+    }
 
     void Start()
     {
-        string sceneName = SceneManager.GetActiveScene().name;
-        if (sceneName == "Main Menu")
-        {
-            MusicManager.Instance.PlayMusic("Main Menu");
-        }
-        else if (sceneName == "Gameplay")
-        {
-            MusicManager.Instance.PlayMusic("Gameplay Music");
-        }
-
         foreach (var prefab in birdPrefabs)
         {
             queue.Enqueue(Instantiate(prefab, waitPoint.position, Quaternion.identity));
         }
 
-        slingshot.OnBirdLaunch += HandleLaunched;
-        RepositionQueue();
-        LoadNext();
+       pigsAlive = FindObjectsByType<Pig>(FindObjectsSortMode.None).Length;
 
-        pigsAlive = FindObjectsByType<Pig>(FindObjectsSortMode.None).Length;
-        Destructible.Destroyed += OnAnyDestroyed;
+       slingshot.OnBirdLaunch += HandleLaunched;
+       Destructible.Destroyed += OnAnyDestroyed;
+
+       RepositionQueue();
+       LoadNext();
     }
 
     void OnDestroy()
@@ -49,21 +72,57 @@ public class LevelManager : MonoBehaviour
         Destructible.Destroyed -= OnAnyDestroyed;
     }
 
+    // ---------------Win/Lose----------------
     private void OnAnyDestroyed(Destructible d)
     {
+        if (state != GameState.Playing) return;
         if (d is Pig && --pigsAlive <= 0)
         {
-            Debug.Log("Out of pigs, WIN!");
+            StartCoroutine(WinRoutine());
         }
     }
 
+    private IEnumerator LoseCheckRoutine()
+    {
+        yield return new WaitForSeconds(loseSettleDelay);
+        if (state != GameState.Playing) yield break;
+
+        state = GameState.Lose;
+        slingshot.enabled = false;
+        OnLevelEnded?.Invoke(false, ScoreManager.Instance.Point, 0);
+    }
+
+    private IEnumerator WinRoutine()
+    {
+        state = GameState.Won;
+        slingshot.enabled = false;
+        yield return new WaitForSeconds(winSettleDelay);
+
+        ScoreManager.Instance.Add(birdsLeft * levelData.birdBonus);
+        int point = ScoreManager.Instance.Point;
+        int starts = CalcStarts(point);
+
+        OnLevelEnded?.Invoke(true, point, starts);
+    }
+
+    private int CalcStarts(int point)
+    {
+        if (point >= levelData.threeStart) return 3;
+        if (point >= levelData.twoStart) return 2;
+        return 1;
+    }
+
+    // ------------ Wait on Bird---------------
     private void LoadNext()
     {
+        if (state != GameState.Playing) return;
+
         if (queue.Count == 0)
         {
-            Debug.Log("Out of bird");
+            StartCoroutine(LoseCheckRoutine());
             return;
         }
+
         Bird next = queue.Dequeue();
         RepositionQueue();
         StartCoroutine(HopToSling(next));
@@ -97,6 +156,9 @@ public class LevelManager : MonoBehaviour
 
     private void HandleLaunched(Bird bird)
     {
+        birdsLeft--;
+        OnBirdLeftChanged?.Invoke(birdsLeft);
+
         followCam.Follow = bird.transform;
         followCam.Priority = 20; // Increase IdleCam (10) camera turn to follow bird
         bird.OnFinished += HandleFinished;

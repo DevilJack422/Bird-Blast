@@ -31,7 +31,7 @@ public class Slingshot : MonoBehaviour
 
     void Update()
     {
-        if (bird == null || bird.IsLaunched || Pointer.current == null) return;
+        if (bird == null || bird.IsLaunched || Pointer.current == null || Time.timeScale == 0) return;
 
         Vector2 pointer = cam.ScreenToWorldPoint(Pointer.current.position.ReadValue());
 

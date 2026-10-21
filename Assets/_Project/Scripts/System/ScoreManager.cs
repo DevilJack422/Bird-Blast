@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -11,9 +12,11 @@ public class ScoreManager : MonoBehaviour
     void OnEnable() => Destructible.Destroyed += HandleDestroy;
     void OnDisable() => Destructible.Destroyed -= HandleDestroy;
 
-    private void HandleDestroy(Destructible d)
+    private void HandleDestroy(Destructible d) => Add(d.PointValue);
+
+    public void Add(int amount)
     {
-        Point += d.PointValue;
+        Point += amount;
         OnScoreChanged?.Invoke(Point);
     }
 }

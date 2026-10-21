@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 605ce7d5364e23e4a8187217acecdc2e, type: 3}
   m_Name: Level3
   m_EditorClassIdentifier: Assembly-CSharp::LevelData
-  levelIndex: 1
-  levelName: Level 1
+  levelIndex: 3
+  levelName: Level 3
   nextSceneName: 
   oneStart: 10000
   twoStart: 30000

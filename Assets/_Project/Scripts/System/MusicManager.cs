@@ -14,6 +14,7 @@ public class MusicManager : MonoBehaviour
         if (Instance != null)
         {
             Destroy(gameObject);
+            return;
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
@@ -37,6 +38,7 @@ public class MusicManager : MonoBehaviour
         musicSource.clip = nextTrack;
         musicSource.Play();
 
+        percent = 0f;
         while (percent < 1)
         {
             percent += Time.deltaTime * 1 / fadeDuration;

@@ -128,8 +128,8 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 0.5
+  m_Offset: {x: 0, y: -0.022375664}
+  m_Radius: 0.29861936
 --- !u!50 &6173410511217626173
 Rigidbody2D:
   serializedVersion: 5
@@ -181,5 +181,6 @@ MonoBehaviour:
   - {fileID: -4699864045137833088, guid: c15c022e27ca5e94485294b9aad9a91f, type: 3}
   - {fileID: -3513553625569913001, guid: c15c022e27ca5e94485294b9aad9a91f, type: 3}
   breakEffect: {fileID: 0}
-  hitSFX: 2
-  breakSFX: 3
+  soundGroup: Wood
+  HitSound: Wood Hit
+  BreakSound: Wood Break
