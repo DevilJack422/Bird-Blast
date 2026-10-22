@@ -7,11 +7,11 @@ public class BackgroundMusic : MonoBehaviour
     {
         string sceneName = SceneManager.GetActiveScene().name;
 
-        if (sceneName == "Level 1")
+        if (sceneName == "Level 1" || sceneName == "Level 2" || sceneName == "Level 3")
         {
             MusicManager.Instance.PlayMusic("Gameplay");
         }
-        else if (sceneName == "MainMenu")
+        else if (sceneName == "MainMenu" || sceneName == "LevelSelect")
         {
             MusicManager.Instance.PlayMusic("MainMenu");
         }
