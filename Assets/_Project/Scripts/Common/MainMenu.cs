@@ -9,6 +9,8 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject menuPanel;
     [SerializeField] private GameObject optionPanel;
 
+    private NameEntryUI nameEntry;
+
     void Start()
     {
         menuPanel.SetActive(true);
@@ -17,6 +19,11 @@ public class MainMenu : MonoBehaviour
 
     public void PlayClick()
     {
+        if (!SaveSystem.HasPlayer)
+        {
+            nameEntry.Open();
+            return;
+        }
         SceneManager.LoadScene("LevelSelect");
     }
 

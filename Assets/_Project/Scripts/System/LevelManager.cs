@@ -92,9 +92,10 @@ public class LevelManager : MonoBehaviour
 
         ScoreManager.Instance.Add(birdsLeft * levelData.birdBonus);
         int point = ScoreManager.Instance.Point;
-        int starts = CalcStarts(point);
+        int stars = CalcStarts(point);
 
-        OnLevelEnded?.Invoke(true, point, starts);
+        SaveSystem.SaveResult(levelData.levelIndex, point, stars);
+        OnLevelEnded?.Invoke(true, point, stars);
     }
 
     private int CalcStarts(int point)
