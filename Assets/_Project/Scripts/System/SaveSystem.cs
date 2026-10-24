@@ -2,8 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using Unity.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public static class SaveSystem
@@ -31,6 +33,7 @@ public static class SaveSystem
             Debug.LogWarning($"SaveSystem: file save error, create new. {e.Message}");
         }
         data ??= new SaveData();
+        MergeDuplicates();
     }
 
     private static void Save()
@@ -78,7 +81,7 @@ public static class SaveSystem
         if (!HasPlayer)  return null;
 
         var p = Data.players.Find(x => string.Equals(x.name, CurrentPlayer, StringComparison.OrdinalIgnoreCase));
-        if (p == null || create)
+        if (p == null && create)
         {
             p = new PlayerProgress { name = CurrentPlayer };
             Data.players.Add(p);
@@ -98,7 +101,12 @@ public static class SaveSystem
     /// Return true if break record of this level
     public static bool SaveResult(int level, int score, int stars)
     {
-        if (!HasPlayer) return false;
+        if (!HasPlayer)
+        {
+            Debug.LogWarning("[Save] Player does not have name, result NOT save!");
+            return false;
+        }
+        Debug.Log($"[Save] Player={CurrentPlayer} level={level}, score={score}, stars={stars}");
 
         var p = GetProgress(true);
         var lp = p.levels.Find(l => l.levelIndex == level);
@@ -153,6 +161,32 @@ public static class SaveSystem
                             });
         }
         return q.OrderByDescending(e => e.score).ThenBy(e => e.date).Take(count).ToList();
+    }
+
+    private static void MergeDuplicates()
+    {
+        var merged = new List<PlayerProgress>();
+        foreach (var p in data.players)
+        {
+            var m = merged.Find(x => string.Equals(x.name, p.name, StringComparison.OrdinalIgnoreCase));
+            if (m == null)
+            {
+                merged.Add(p);
+                continue;
+            }
+
+            foreach (var lp in p.levels)
+            {
+                var ml = m.levels.Find(l => l.levelIndex == lp.levelIndex);
+                if (ml == null) m.levels.Add(lp);
+                else
+                {
+                    ml.bestScore = Mathf.Max(ml.bestScore, lp.bestScore);
+                    ml.stars = Mathf.Max(ml.stars, lp.stars);
+                }
+            }
+        }
+        data.players = merged;
     }
 
     public static void ResetAll()
