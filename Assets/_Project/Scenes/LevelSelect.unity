@@ -1220,7 +1220,7 @@ MonoBehaviour:
     - {fileID: 690522600}
     - {fileID: 228024268}
     - {fileID: 37133954}
-  starOn: {r: 1, g: 1, b: 1, a: 1}
+  starOn: {r: 1, g: 0.8874891, b: 0, a: 1}
   starOff: {r: 0.3, g: 0.3, b: 0.3, a: 0.6}
 --- !u!114 &899797980
 MonoBehaviour:
@@ -2228,7 +2228,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 499.99997, y: -223.00005}
+  m_AnchoredPosition: {x: 499.99997, y: -210}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1538736125

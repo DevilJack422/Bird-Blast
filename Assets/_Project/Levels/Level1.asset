@@ -15,7 +15,7 @@ MonoBehaviour:
   levelIndex: 1
   levelName: Level 1
   nextSceneName: Level 2
-  oneStart: 2000
-  twoStart: 5000
-  threeStart: 10300
-  birdBonus: 10000
+  oneStart: 5000
+  twoStart: 5350
+  threeStart: 5700
+  birdBonus: 1500
