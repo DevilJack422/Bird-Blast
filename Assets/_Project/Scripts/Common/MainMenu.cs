@@ -43,4 +43,10 @@ public class MainMenu : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void ResetClick()
+    {
+        SaveSystem.ResetAll();
+        SceneLoader.Reload();
+    }
 }
