@@ -49,18 +49,10 @@ public static class SaveSystem
     }
 
     //------------------------Player's name--------------------------
-    public static bool TrySetPlayer(string raw, out string error)
+    public static void SetPlayer(string clean)
     {
-        string name = Sanitize(raw);
-        if (name.Length < 3)
-        {
-            error = "Name must be 3-12 characters";
-            return false;
-        }
-        Data.currentPlayer = name;
-        Save();
-        error = null;
-        return true;
+        var existing = FindPlayer(clean);
+        Data.currentPlayer = existing != null ? existing.name : clean;
     }
 
     private static string Sanitize(string s)
@@ -74,6 +66,32 @@ public static class SaveSystem
         string r = sb.ToString().Trim();
         return r.Length > 12 ? r.Substring(0, 12).Trim() : r;
     }
+
+    public static bool ValidateName(string raw, out string clean, out string error)
+    {
+        clean = Sanitize(raw);
+        if (clean.Length < 3)
+        {
+            error = "Name must be 3-12 characters";
+            return false;
+        }
+        error = null;
+        return true;
+    }
+
+    public static bool PlayerExists(string name) => FindPlayer(name) != null;
+
+    private static PlayerProgress FindPlayer(string name) => Data.players.Find(p => string.Equals(p.name, name, StringComparison.OrdinalIgnoreCase));
+
+    public static void GetPlayerSummary(string name, out string displayName, out int totalStars, out int levelCleared)
+    {
+        var p = FindPlayer(name);
+        displayName = p != null ? p.name : name;
+        totalStars = p != null ? p.levels.Sum(l => l.stars) : 0;
+        levelCleared = p != null ? p.levels.Count(l => l.stars > 0) : 0;
+    }
+
+
 
     //-----------------Progress--------------------------
     private static PlayerProgress GetProgress(bool create)
