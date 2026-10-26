@@ -45,8 +45,6 @@ public class LevelSelect : MonoBehaviour
             bool isUnlocked = SaveSystem.IsUnlock(level);
             int starCount = SaveSystem.GetStars(level);
 
-            Debug.Log($"[LevelSelect] level {level}: unlocked={isUnlocked}, stars={starCount}, player={SaveSystem.CurrentPlayer}");
-
             if (slot.button != null) slot.button.interactable = isUnlocked;
             if (slot.lockIcon != null) slot.lockIcon.SetActive(!isUnlocked);
 

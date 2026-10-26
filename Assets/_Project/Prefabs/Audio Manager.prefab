@@ -95,6 +95,14 @@ MonoBehaviour:
     clips:
     - {fileID: 8300000, guid: b150887875a4abc499b012513fe926bb, type: 3}
     - {fileID: 8300000, guid: 0ef26fc4735abb045902372a204a8f9f, type: 3}
+  - groupId: Stone
+    clips:
+    - {fileID: 8300000, guid: a7092f248df70f04e8d471d1621b8561, type: 3}
+    - {fileID: 8300000, guid: 469463c18396f6446bfab479b1f104b8, type: 3}
+  - groupId: Glass
+    clips:
+    - {fileID: 8300000, guid: d95d17811bfc39c4aa68f7b19fca9364, type: 3}
+    - {fileID: 8300000, guid: 5b4ae303355e21e45ae5bea168b0f481, type: 3}
 --- !u!114 &3256823178134153721
 MonoBehaviour:
   m_ObjectHideFlags: 0

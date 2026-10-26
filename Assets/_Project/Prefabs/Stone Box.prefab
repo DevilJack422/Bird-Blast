@@ -118,9 +118,9 @@ MonoBehaviour:
   - {fileID: -5049687537974783880, guid: 716a8753dee9a0748b01a1b6cf851089, type: 3}
   - {fileID: -1943996745496904487, guid: 716a8753dee9a0748b01a1b6cf851089, type: 3}
   breakEffect: {fileID: 0}
-  soundGroup: Wood
-  HitSound: Wood Hit
-  BreakSound: Wood Break
+  soundGroup: Stone
+  HitSound: Stone Hit
+  BreakSound: Stone Break
 --- !u!61 &6124949302867886296
 BoxCollider2D:
   m_ObjectHideFlags: 0

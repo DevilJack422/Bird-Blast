@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class Destructible : MonoBehaviour
+public class Destructible : MonoBehaviour, IDamageable
 {
     public static event Action<Destructible> Destroyed;
 
@@ -59,7 +59,7 @@ public class Destructible : MonoBehaviour
         TakeDamage(damage);
     }
 
-    private void TakeDamage(float damage)
+    public void TakeDamage(float damage)
     {
         if (isDead) return;
         health -= damage;
