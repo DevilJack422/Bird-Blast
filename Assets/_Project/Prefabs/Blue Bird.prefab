@@ -86,7 +86,7 @@ MonoBehaviour:
   stopTime: 1
   maxFlightTime: 5
   killY: -10
-  abilityDelay: 0.1
+  abilityDelay: 0
   abilitySoundName: 
   miniPrefab: {fileID: 5852490826997017145, guid: ec7884d4059a1fe4bb29b146dae45eca, type: 3}
   splitAngle: 15

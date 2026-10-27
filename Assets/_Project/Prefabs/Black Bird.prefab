@@ -86,7 +86,7 @@ MonoBehaviour:
   stopTime: 1
   maxFlightTime: 8
   killY: -10
-  abilityDelay: 0.1
+  abilityDelay: 0
   abilitySoundName: 
   radius: 2.5
   damage: 80

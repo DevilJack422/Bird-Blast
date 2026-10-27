@@ -98,7 +98,7 @@ MonoBehaviour:
   stopTime: 1
   maxFlightTime: 5
   killY: -10
-  abilityDelay: 0.1
+  abilityDelay: 0
   abilitySoundName: Bird Hurt
   boost: 2
   minSpeed: 14
