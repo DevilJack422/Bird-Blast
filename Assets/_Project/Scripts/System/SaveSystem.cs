@@ -2,10 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Text;
-using Unity.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public static class SaveSystem
@@ -124,7 +121,6 @@ public static class SaveSystem
             Debug.LogWarning("[Save] Player does not have name, result NOT save!");
             return false;
         }
-        Debug.Log($"[Save] Player={CurrentPlayer} level={level}, score={score}, stars={stars}");
 
         var p = GetProgress(true);
         var lp = p.levels.Find(l => l.levelIndex == level);

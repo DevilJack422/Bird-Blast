@@ -181,6 +181,6 @@ MonoBehaviour:
   - {fileID: 1760218502823135268, guid: c15c022e27ca5e94485294b9aad9a91f, type: 3}
   - {fileID: 4294557144701112526, guid: c15c022e27ca5e94485294b9aad9a91f, type: 3}
   breakEffect: {fileID: 0}
-  soundGroup: Wood
-  HitSound: Wood Hit
-  BreakSound: Wood Break
+  soundGroup: Pig
+  HitSound: Pig Hit
+  BreakSound: Pig Break

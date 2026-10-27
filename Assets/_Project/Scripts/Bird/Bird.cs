@@ -42,7 +42,7 @@ public class Bird : MonoBehaviour
        
         flightTimer = Time.deltaTime;
         HandleAbilityInput();
-        
+
         slowTimer = rb.linearVelocity.magnitude < stopSpeed ? slowTimer + Time.deltaTime : 0f;
 
         bool shouldFinish = slowTimer >= stopTime
@@ -69,10 +69,21 @@ public class Bird : MonoBehaviour
 
     private void HandleAbilityInput()
     {
+        if (Pointer.current == null)
+        {
+            Debug.Log("[Abillity] Pointer.current = null");
+            return;
+        }
+
+        if (!Pointer.current.press.wasPressedThisFrame) return;
+        Debug.Log($"[Ability] click! type={GetType().Name} HasAbility={HasAbility} used={AbilityUsed} t={flightTimer:F2} timeScale={Time.timeScale}");
+
         if (!HasAbility || AbilityUsed || flightTimer < abilityDelay) return;
         if (Time.timeScale == 0 || Pointer.current == null) return;
-        if (!Pointer.current.press.wasPressedThisFrame) return;
-        if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject()) return;
+        
+        bool overUI = EventSystem.current != null && EventSystem.current.IsPointerOverGameObject();
+        Debug.Log($"[Ability] overUI={overUI}");
+        if (overUI) return;
 
         TriggerAbility();
     }

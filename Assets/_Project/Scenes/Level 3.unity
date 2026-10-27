@@ -6811,6 +6811,22 @@ PrefabInstance:
       propertyPath: waitPoint
       value: 
       objectReference: {fileID: 1183186955}
+    - target: {fileID: 4350350459911108721, guid: ec1f57aac848af54cac0036be1a66af1, type: 3}
+      propertyPath: birdPrefabs.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4350350459911108721, guid: ec1f57aac848af54cac0036be1a66af1, type: 3}
+      propertyPath: 'birdPrefabs.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1693393627342481303, guid: da07f192f142c4a49b202804bfe4b51b, type: 3}
+    - target: {fileID: 4350350459911108721, guid: ec1f57aac848af54cac0036be1a66af1, type: 3}
+      propertyPath: 'birdPrefabs.Array.data[2]'
+      value: 
+      objectReference: {fileID: -6224179716643756719, guid: 5bad290df26da56498a7a2014cc608de, type: 3}
+    - target: {fileID: 4350350459911108721, guid: ec1f57aac848af54cac0036be1a66af1, type: 3}
+      propertyPath: 'birdPrefabs.Array.data[3]'
+      value: 
+      objectReference: {fileID: -9212340860123362490, guid: f0a4211c6b74efd4e949edcfabd009fb, type: 3}
     - target: {fileID: 5078073285176045197, guid: ec1f57aac848af54cac0036be1a66af1, type: 3}
       propertyPath: m_Name
       value: Level Manager

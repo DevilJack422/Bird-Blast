@@ -169,7 +169,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc44be879e594594fa9cbc0e396ece6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Bird
-  stopSpeed: 1.5
-  stopTime: 1
-  maxFlightTime: 5
+  stopSpeed: 2
+  stopTime: 1.5
+  maxFlightTime: 1
   killY: -10
+  abilityDelay: 0.1
+  abilitySoundName: 
