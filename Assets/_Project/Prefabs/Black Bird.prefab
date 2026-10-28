@@ -92,4 +92,4 @@ MonoBehaviour:
   damage: 80
   force: 8
   autoExplodeDelay: 1.5
-  explosionEffect: {fileID: 0}
+  explosionEffect: {fileID: 3293571292465862545, guid: 7d7570173759ef1458b6a1119e9186bb, type: 3}

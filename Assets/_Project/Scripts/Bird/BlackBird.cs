@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class BlackBird : Bird
@@ -16,7 +15,7 @@ public class BlackBird : Bird
     protected override void UseAbility()
     {
         Explosion.Create(transform.position, radius, damage, force, gameObject);
-        if (explosionEffect != null) Instantiate(explosionEffect, transform.position, Quaternion.identity);
+        PlayEffect();
 
         foreach (var sr in GetComponentsInChildren<SpriteRenderer>()) sr.enabled = false;
         foreach (var col in GetComponentsInChildren<Collider2D>()) col.enabled = false;
@@ -37,5 +36,10 @@ public class BlackBird : Bird
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, radius);
+    }
+
+    private void PlayEffect()
+    {
+        if (explosionEffect != null) Instantiate(explosionEffect, transform.localPosition, Quaternion.identity);
     }
 }
