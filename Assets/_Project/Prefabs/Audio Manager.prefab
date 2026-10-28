@@ -103,6 +103,9 @@ MonoBehaviour:
     clips:
     - {fileID: 8300000, guid: d95d17811bfc39c4aa68f7b19fca9364, type: 3}
     - {fileID: 8300000, guid: 5b4ae303355e21e45ae5bea168b0f481, type: 3}
+  - groupId: Effect
+    clips:
+    - {fileID: 8300000, guid: 5e6524bf70a426d48a307a1450c2c6bc, type: 3}
 --- !u!114 &3256823178134153721
 MonoBehaviour:
   m_ObjectHideFlags: 0

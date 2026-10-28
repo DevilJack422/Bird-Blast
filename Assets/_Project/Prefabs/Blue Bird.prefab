@@ -88,12 +88,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BlueBird
   stopSpeed: 0.3
   stopTime: 1
-  settleTimeAfterHit: 4
+  settleTimeAfterHit: 2
   fadeDuration: 0.4
   maxFlightTime: 5
   killY: -10
-  smokeEffect: {fileID: 0}
+  smokeEffect: {fileID: 7989204633775417997, guid: ed69bedf8a35124419874d436b94ec03, type: 3}
   abilityDelay: 0
-  abilitySoundName: 
+  abilitySoundName: Bird Hurt
   miniPrefab: {fileID: 5852490826997017145, guid: ec7884d4059a1fe4bb29b146dae45eca, type: 3}
   splitAngle: 15

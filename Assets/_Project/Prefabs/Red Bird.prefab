@@ -175,6 +175,6 @@ MonoBehaviour:
   fadeDuration: 0.4
   maxFlightTime: 1
   killY: -10
-  smokeEffect: {fileID: 0}
+  smokeEffect: {fileID: 7989204633775417997, guid: ed69bedf8a35124419874d436b94ec03, type: 3}
   abilityDelay: 0.1
   abilitySoundName: 

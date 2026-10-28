@@ -15,6 +15,7 @@ public class BlackBird : Bird
     protected override void UseAbility()
     {
         Explosion.Create(transform.position, radius, damage, force, gameObject);
+        SoundManager.Instance.PlaySound("Effect", "Explosion");
         PlayEffect();
 
         foreach (var sr in GetComponentsInChildren<SpriteRenderer>()) sr.enabled = false;
@@ -40,6 +41,6 @@ public class BlackBird : Bird
 
     private void PlayEffect()
     {
-        if (explosionEffect != null) Instantiate(explosionEffect, transform.localPosition, Quaternion.identity);
+        if (explosionEffect != null) Instantiate(explosionEffect, transform.position, Quaternion.identity);
     }
 }

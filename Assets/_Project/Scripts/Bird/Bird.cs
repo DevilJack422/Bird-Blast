@@ -16,6 +16,7 @@ public class Bird : MonoBehaviour
     [SerializeField] private float fadeDuration = 0.4f;
     [SerializeField] private float maxFlightTime = 8f; // Safe: Flight too long ends
     [SerializeField] private float killY = -10f; // Fall under this point is end
+    [SerializeField] private GameObject smokeEffect;
 
     [Header("-----Ablity-----")]
     [SerializeField] private float abilityDelay = 0;
@@ -74,6 +75,7 @@ public class Bird : MonoBehaviour
         if (isFinishd) return;
         isFinishd = true;
         OnFinished?.Invoke(this);
+        if (smokeEffect != null) Instantiate(smokeEffect, transform.position, Quaternion.identity);
         StartCoroutine(FadeAndDestroy());
     }
 

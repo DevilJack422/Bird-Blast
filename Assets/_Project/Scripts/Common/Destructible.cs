@@ -19,6 +19,7 @@ public class Destructible : MonoBehaviour, IDamageable
     [Header("-----UI-----")]
     [SerializeField] private Sprite[] damageSprite; // Hold damage sprite from normal to destroy
     [SerializeField] private GameObject breakEffect; // Prefab effect
+    [SerializeField] private GameObject smokeEffect;
 
     [Header("-----Sound-----")]
     [SerializeField] private string soundGroup = "Wood";
@@ -33,9 +34,9 @@ public class Destructible : MonoBehaviour, IDamageable
 
     public int PointValue => pointValue;
 
-    protected virtual void Awake() 
+    protected virtual void Awake()
     {
-        health = maxHealth; 
+        health = maxHealth;
         spawnTime = Time.time;
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
@@ -95,6 +96,7 @@ public class Destructible : MonoBehaviour, IDamageable
 
         Destroyed?.Invoke(this);
         if (breakEffect != null) Instantiate(breakEffect, transform.position, Quaternion.identity);
+        if (smokeEffect != null) Instantiate(smokeEffect, transform.position, Quaternion.identity);
         Play(BreakSound);
         Destroy(gameObject);
     }
