@@ -52,6 +52,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Black Bird
       objectReference: {fileID: 0}
+    - target: {fileID: 8213437296882909441, guid: d39f8b7000950eb47ac22c310ae5b5ef, type: 3}
+      propertyPath: m_AngularDamping
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8834784849667483014, guid: d39f8b7000950eb47ac22c310ae5b5ef, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -82,10 +86,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1279c2399b06d841ab42b292ae2c21a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BlackBird
-  stopSpeed: 0.3
-  stopTime: 1
+  stopSpeed: 0.6
+  stopTime: 0.8
+  settleTimeAfterHit: 4
+  fadeDuration: 0.4
   maxFlightTime: 8
   killY: -10
+  smokeEffect: {fileID: 0}
   abilityDelay: 0
   abilitySoundName: 
   radius: 2.5

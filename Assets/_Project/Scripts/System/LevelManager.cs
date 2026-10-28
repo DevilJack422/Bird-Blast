@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public enum GameState { Playing, Won, Lose }
 
@@ -18,6 +19,11 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private float spacing = 0.8f;
     [SerializeField] private float nextBirdDelay = 1f;
 
+    [Header("-----Camera-----")]
+    [SerializeField] private CinemachineCamera introCam;
+    [SerializeField] private Transform camTarget;
+    [SerializeField] private float introHold = 2f;
+    [SerializeField] private float explosionCamHold = 1.5f;
 
     [Header("-----Offset-----")]
     [SerializeField] private Slingshot slingshot;
@@ -32,6 +38,11 @@ public class LevelManager : MonoBehaviour
     private GameState state = GameState.Playing;
     private int pigsAlive;
     private int birdsLeft;
+    private bool introRunning = true;
+    private bool birdInFlight;
+    private Bird followedBird;
+    private float camHoldUntil;
+    private Coroutine camReturn;
 
     public GameState State => state;
     public int BirdsLeft => birdsLeft;
@@ -54,14 +65,21 @@ public class LevelManager : MonoBehaviour
        slingshot.OnBirdLaunch += HandleLaunched;
        Destructible.Destroyed += OnAnyDestroyed;
 
+       Explosion.Occurred += OnExplosion;
        RepositionQueue();
-       LoadNext();
+       StartCoroutine(IntroRoutine());
+    }
+
+    void LateUpdate()
+    {
+        if (followCam != null) camTarget.position = followCam.transform.position;
     }
 
     void OnDestroy()
     {
         slingshot.OnBirdLaunch -= HandleLaunched;
         Destructible.Destroyed -= OnAnyDestroyed;
+        Explosion.Occurred -= OnExplosion;
     }
 
     // ---------------Win/Lose----------------
@@ -152,6 +170,9 @@ public class LevelManager : MonoBehaviour
         birdsLeft--;
         OnBirdLeftChanged?.Invoke(birdsLeft);
 
+        birdInFlight = true;
+        followedBird = bird;
+        camTarget.position = bird.transform.position;
         followCam.Follow = bird.transform;
         followCam.Priority = 20; // Increase IdleCam (10) camera turn to follow bird
         bird.OnFinished += HandleFinished;
@@ -160,14 +181,73 @@ public class LevelManager : MonoBehaviour
     private void HandleFinished(Bird bird)
     {
         bird.OnFinished -= HandleFinished;
-        followCam.Priority = 0; // Under IdleCam so camera turn back
-        followCam.Follow = null;
+        birdInFlight = false;
+        if (followedBird == bird) followedBird = null;
+        StartCameraReturn();
         StartCoroutine(NextAfterDelay());
     }
 
     private IEnumerator NextAfterDelay()
     {
         yield return new WaitForSeconds(nextBirdDelay);
+        while (camReturn != null) yield return null;
         LoadNext();
+    }
+
+    private IEnumerator IntroRoutine()
+    {
+        introRunning = true;
+
+        if (introCam != null)
+        {
+            var pigs = FindObjectsByType<Pig>(FindObjectsSortMode.None);
+            if (pigs.Length > 0)
+            {
+                Vector3 sum = Vector3.zero;
+                foreach (var p in pigs) sum += p.transform.position;
+                Vector3 c = sum / pigs.Length;
+                introCam.transform.position = new Vector3(c.x, c.y, introCam.transform.position.z);
+            }
+
+            introCam.Priority = 30;
+            float t = 0f;
+            while (t < introHold)
+            {
+                t += Time.deltaTime;
+                if (t > 0.05f && Pointer.current != null && Pointer.current.press.wasPressedThisFrame) break;
+                yield return null;
+            }
+
+            introCam.Priority = 0;
+            yield return null;
+            var brain = Camera.main.GetComponent<CinemachineBrain>();
+            while (brain != null && brain.IsBlending) yield return null;
+        }
+
+        introRunning = false;
+        LoadNext();
+    }
+
+    private void OnExplosion(Vector2 pos, float radius)
+    {
+        if (introRunning) return;
+        camHoldUntil = Time.time + explosionCamHold;
+        followedBird = null;
+        camTarget.position = new Vector3(pos.x, pos.y, 0f);
+        followCam.Follow = camTarget;
+        followCam.Priority = 20;
+        StartCameraReturn();
+    }
+
+    private void StartCameraReturn()
+    {
+        if (camReturn == null) camReturn = StartCoroutine(CameraReturnRoutine());
+    }
+
+    private IEnumerator CameraReturnRoutine()
+    {
+        while (birdInFlight || Time.time < camHoldUntil) yield return null;
+        followCam.Priority = 0;
+        camReturn = null;
     }
 }

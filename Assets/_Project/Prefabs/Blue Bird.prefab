@@ -52,6 +52,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Blue Bird
       objectReference: {fileID: 0}
+    - target: {fileID: 8213437296882909441, guid: d39f8b7000950eb47ac22c310ae5b5ef, type: 3}
+      propertyPath: m_AngularDamping
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8834784849667483014, guid: d39f8b7000950eb47ac22c310ae5b5ef, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -84,8 +88,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BlueBird
   stopSpeed: 0.3
   stopTime: 1
+  settleTimeAfterHit: 4
+  fadeDuration: 0.4
   maxFlightTime: 5
   killY: -10
+  smokeEffect: {fileID: 0}
   abilityDelay: 0
   abilitySoundName: 
   miniPrefab: {fileID: 5852490826997017145, guid: ec7884d4059a1fe4bb29b146dae45eca, type: 3}

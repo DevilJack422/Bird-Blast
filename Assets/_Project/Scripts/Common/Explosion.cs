@@ -1,10 +1,13 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public static class Explosion
 {
+    public static event Action<Vector2, float> Occurred;
     public static void Create(Vector2 pos, float radius, float maxDamage, float maxForce, GameObject self = null)
     {
+        Occurred?.Invoke(pos, radius);
         var damaged = new HashSet<IDamageable>();
 
         foreach (var hit in Physics2D.OverlapCircleAll(pos, radius))
