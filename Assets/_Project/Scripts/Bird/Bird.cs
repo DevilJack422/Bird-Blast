@@ -8,11 +8,10 @@ using System.Collections;
 public class Bird : MonoBehaviour
 {
     public event Action<Bird> OnFinished;
+    public event Action<Bird> OnFirstHit;
 
     [Header("-----End Turn-----")]
-    [SerializeField] private float stopSpeed = 0.3f; // Speed under this number mean stop
-    [SerializeField] private float stopTime = 1f; // How long standing still before it end 
-    [SerializeField] private float settleTimeAfterHit = 4f; // After the first impact, bird only live after some seconds
+    [SerializeField] private float lifeAfterHit = 3f; // After the first hit, how long the bird live
     [SerializeField] private float fadeDuration = 0.4f;
     [SerializeField] private float maxFlightTime = 8f; // Safe: Flight too long ends
     [SerializeField] private float killY = -10f; // Fall under this point is end
@@ -23,11 +22,8 @@ public class Bird : MonoBehaviour
     [SerializeField] private string abilitySoundName = "";
 
     protected Rigidbody2D rb;
-    private float flightTimer, slowTimer;
-    private bool isFinishd;
-    private ContactPoint2D[] contacts = new ContactPoint2D[1];
-    private float hitTimer;
-    private bool hasHit;
+    private float flightTimer, hitTimer;
+    private bool isFinishd, hasHit;
 
     public bool IsLaunched { get; private set; }
     public bool AbilityUsed { get; private set; }
@@ -47,20 +43,23 @@ public class Bird : MonoBehaviour
     {
         if (!IsLaunched || isFinishd) return;
 
-        flightTimer = Time.deltaTime;
-        HandleAbilityInput();
-
-        if (!hasHit && flightTimer > 0.2f && rb.GetContacts(contacts) > 0) hasHit = true;
+        flightTimer += Time.deltaTime;
         if (hasHit) hitTimer += Time.deltaTime;
 
-        slowTimer = rb.linearVelocity.magnitude < stopSpeed ? slowTimer + Time.deltaTime : 0f;
+        HandleAbilityInput();
 
-        bool shouldFinish = slowTimer >= stopTime
-                            || hitTimer >= settleTimeAfterHit
+        bool shouldFinish = (hasHit && hitTimer >= lifeAfterHit)
                             || flightTimer >= maxFlightTime
                             || transform.position.y < killY;
 
         if (shouldFinish && CanFinish()) Finish();
+    }
+
+    protected virtual void OnCollisionEnter2D(Collision2D other) 
+    {
+        if (!IsLaunched || hasHit || isFinishd || flightTimer < 0.1f) return;
+        hasHit = true;
+        OnFirstHit?.Invoke(this);    
     }
 
     public void Launch(Vector2 velocity)
@@ -82,9 +81,7 @@ public class Bird : MonoBehaviour
     private void HandleAbilityInput()
     {
         if (!Pointer.current.press.wasPressedThisFrame) return;
-
         if (!HasAbility || AbilityUsed || flightTimer < abilityDelay) return;
-
         if (Time.timeScale == 0 || Pointer.current == null) return;
 
         bool overUI = EventSystem.current != null && EventSystem.current.IsPointerOverGameObject();

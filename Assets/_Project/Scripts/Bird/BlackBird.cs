@@ -24,8 +24,10 @@ public class BlackBird : Bird
         Finish();
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    protected override void OnCollisionEnter2D(Collision2D collision)
     {
+        base.OnCollisionEnter2D(collision);
+
         if (!IsLaunched || AbilityUsed || isHitSomething) return;
         isHitSomething = true;
         Invoke(nameof(AutoExplode), autoExplodeDelay);

@@ -169,11 +169,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc44be879e594594fa9cbc0e396ece6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Bird
-  stopSpeed: 0.6
-  stopTime: 0.8
-  settleTimeAfterHit: 4
+  lifeAfterHit: 3
   fadeDuration: 0.4
-  maxFlightTime: 1
+  maxFlightTime: 12
   killY: -10
   smokeEffect: {fileID: 7989204633775417997, guid: ed69bedf8a35124419874d436b94ec03, type: 3}
   abilityDelay: 0.1
