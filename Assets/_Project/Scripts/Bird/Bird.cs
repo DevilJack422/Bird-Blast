@@ -16,14 +16,16 @@ public class Bird : MonoBehaviour
     [SerializeField] private float maxFlightTime = 8f; // Safe: Flight too long ends
     [SerializeField] private float killY = -10f; // Fall under this point is end
     [SerializeField] private GameObject smokeEffect;
+    [SerializeField] private string soundId = "Bird";
 
     [Header("-----Ablity-----")]
     [SerializeField] private float abilityDelay = 0;
-    [SerializeField] private string abilitySoundName = "";
 
     protected Rigidbody2D rb;
     private float flightTimer, hitTimer;
     private bool isFinishd, hasHit;
+    private string birdHurtSound = "Bird Hurt";
+    private string abilitySoundName = "Bird Ability Used";
 
     public bool IsLaunched { get; private set; }
     public bool AbilityUsed { get; private set; }
@@ -59,6 +61,10 @@ public class Bird : MonoBehaviour
     {
         if (!IsLaunched || hasHit || isFinishd || flightTimer < 0.1f) return;
         hasHit = true;
+        if (SoundManager.Instance != null && !string.IsNullOrEmpty(birdHurtSound))
+        {
+            SoundManager.Instance.PlaySound(soundId, birdHurtSound);
+        }
         OnFirstHit?.Invoke(this);    
     }
 
@@ -96,7 +102,7 @@ public class Bird : MonoBehaviour
         AbilityUsed = true;
         if (!string.IsNullOrEmpty(abilitySoundName) && SoundManager.Instance != null)
         {
-            SoundManager.Instance.PlaySound("Bird", abilitySoundName);
+            SoundManager.Instance.PlaySound(soundId, abilitySoundName);
         }
         UseAbility();
     }
