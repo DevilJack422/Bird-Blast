@@ -86,7 +86,7 @@ MonoBehaviour:
   - groupId: Bird
     clips:
     - {fileID: 8300000, guid: 47286387d7eb39a4a933467b53697ae4, type: 3}
-    - {fileID: 8300000, guid: 0ef26fc4735abb045902372a204a8f9f, type: 3}
+    - {fileID: 8300000, guid: 6d43c9641d8f763429c4645b5c26111c, type: 3}
   - groupId: Wood
     clips:
     - {fileID: 8300000, guid: 01131de66dea8a241b6d468b306e6e71, type: 3}
@@ -106,6 +106,8 @@ MonoBehaviour:
   - groupId: Effect
     clips:
     - {fileID: 8300000, guid: 5e6524bf70a426d48a307a1450c2c6bc, type: 3}
+    - {fileID: 8300000, guid: 76a298a073afded4f84aaff04305db56, type: 3}
+    - {fileID: 8300000, guid: 60c4c10a4bdf94243af239c4b91cac55, type: 3}
 --- !u!114 &3256823178134153721
 MonoBehaviour:
   m_ObjectHideFlags: 0

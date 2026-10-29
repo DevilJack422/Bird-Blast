@@ -39,6 +39,9 @@ public class LevelManager : MonoBehaviour
     private int pigsAlive;
     private int birdsLeft;
     private bool camBusy;
+    private string soundId = "Effect";
+    private string winSoundName = "Win Sound";
+    private string loseSoundName = "Lose Sound";
 
     public GameState State => state;
     public int BirdsLeft => birdsLeft;
@@ -88,6 +91,10 @@ public class LevelManager : MonoBehaviour
 
         state = GameState.Lose;
         slingshot.enabled = false;
+        if (SoundManager.Instance != null && !string.IsNullOrEmpty(loseSoundName))
+        {
+            SoundManager.Instance.PlaySound(soundId, loseSoundName);
+        }
         OnLevelEnded?.Invoke(false, ScoreManager.Instance.Point, 0);
     }
 
@@ -102,6 +109,10 @@ public class LevelManager : MonoBehaviour
         int stars = CalcStarts(point);
 
         SaveSystem.SaveResult(levelData.levelIndex, point, stars);
+        if (SoundManager.Instance != null && !string.IsNullOrEmpty(winSoundName))
+        {
+            SoundManager.Instance.PlaySound(soundId, winSoundName);
+        }
         OnLevelEnded?.Invoke(true, point, stars);
     }
 
