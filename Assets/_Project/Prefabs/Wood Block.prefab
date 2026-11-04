@@ -107,7 +107,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Destructible
   maxHealth: 30
-  pointValue: 100
+  pointValue: 1000
   minImpact: 2
   damageMultiplier: 1
   birdMultiplier: 2
@@ -117,9 +117,11 @@ MonoBehaviour:
   - {fileID: 5066157127405174913, guid: 716a8753dee9a0748b01a1b6cf851089, type: 3}
   - {fileID: 2142553597638386962, guid: 716a8753dee9a0748b01a1b6cf851089, type: 3}
   - {fileID: -6245954607249859595, guid: 716a8753dee9a0748b01a1b6cf851089, type: 3}
-  breakEffect: {fileID: 0}
-  hitSFX: 2
-  breakSFX: 3
+  breakEffect: {fileID: 1777123641829557032, guid: fc7334c54bc58814b9a1fb002cfe1813, type: 3}
+  smokeEffect: {fileID: 7989204633775417997, guid: ed69bedf8a35124419874d436b94ec03, type: 3}
+  soundGroup: Wood
+  HitSound: Wood Hit
+  BreakSound: Wood Break
 --- !u!61 &2228977715698994944
 BoxCollider2D:
   m_ObjectHideFlags: 0

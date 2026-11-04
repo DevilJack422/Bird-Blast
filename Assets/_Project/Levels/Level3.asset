@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LevelData
   levelIndex: 3
   levelName: Level 3
-  nextSceneName: 
-  oneStart: 13000
-  twoStart: 14600
-  threeStart: 16200
+  nextSceneName: Level 4
+  oneStart: 23000
+  twoStart: 34000
+  threeStart: 39900
   birdBonus: 1500

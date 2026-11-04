@@ -27,6 +27,9 @@ public class LevelSelect : MonoBehaviour
     public void Level1Click() => PlayLevel(1);
     public void Level2Click() => PlayLevel(2);
     public void Level3Click() => PlayLevel(3);
+    public void Level4Click() => PlayLevel(4);
+    public void Level5Click() => PlayLevel(5);
+    public void Level6Click() => PlayLevel(6);
      public void MenuClick() => SceneLoader.Load("MainMenu");
 
     private void PlayLevel(int level)

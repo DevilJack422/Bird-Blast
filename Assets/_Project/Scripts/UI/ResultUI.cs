@@ -8,7 +8,7 @@ public class ResultUI : MonoBehaviour
 {
     [SerializeField] private LevelManager levelManager;
     [SerializeField] private GameObject winPanel, losePanel;
-    [SerializeField] private TMP_Text titleText, scoreText;
+    [SerializeField] private TMP_Text loseText, scoreText;
     [SerializeField] private Image[] starts;
     [SerializeField] private Button nextButton;
     [SerializeField] private Color startOn = new Color(1f, 0.85f, 0.2f);
@@ -29,13 +29,12 @@ public class ResultUI : MonoBehaviour
     private void Show(bool won, int point, int startCount)
     {
         if (won) StartCoroutine(WinRoutine(point, startCount));
-        else losePanel.SetActive(true);
+        else ShowLosePanel();
     }
 
     private IEnumerator WinRoutine(int point, int startCount)
     {
         winPanel.SetActive(true);
-        titleText.text = levelManager.Data.levelName + " Clear!";
         nextButton.gameObject.SetActive(!string.IsNullOrEmpty(levelManager.Data.nextSceneName));
         foreach (var s in starts)
         {
@@ -64,6 +63,12 @@ public class ResultUI : MonoBehaviour
             }
             starts[i].transform.localScale = Vector3.one;
         }
+    }
+
+    private void ShowLosePanel()
+    {
+        losePanel.SetActive(true);
+        loseText.text = levelManager.Data.levelName;
     }
 
     public void ReplayClick() => SceneLoader.Reload();

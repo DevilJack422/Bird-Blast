@@ -32,6 +32,10 @@ public class LevelManager : MonoBehaviour
     [Header("-----Physic Delay----")]
     [SerializeField] private float winSettleDelay = 2f;
     [SerializeField] private float loseSettleDelay = 3f;
+
+    [Header("-----Slow-motion-----")]
+    [SerializeField] private float slowMoScale = 0.25f;
+    [SerializeField] private float slowMoHold = 1.2f;
  
     private readonly Queue<Bird> queue = new();
 
@@ -72,6 +76,7 @@ public class LevelManager : MonoBehaviour
     {
         slingshot.OnBirdLaunch -= HandleLaunched;
         Destructible.Destroyed -= OnAnyDestroyed;
+        SlowMotion.ForceReset();
     }
 
     // ---------------Win/Lose----------------
@@ -102,6 +107,8 @@ public class LevelManager : MonoBehaviour
     {
         state = GameState.Won;
         slingshot.enabled = false;
+
+        yield return StartCoroutine(SlowMotion.Routine(slowMoScale, slowMoHold));
         yield return new WaitForSeconds(winSettleDelay);
 
         ScoreManager.Instance.Add(birdsLeft * levelData.birdBonus);

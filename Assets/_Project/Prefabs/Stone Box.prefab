@@ -107,7 +107,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Destructible
   maxHealth: 80
-  pointValue: 400
+  pointValue: 4000
   minImpact: 2
   damageMultiplier: 1
   birdMultiplier: 2
@@ -117,7 +117,8 @@ MonoBehaviour:
   - {fileID: 2419157081530693573, guid: 716a8753dee9a0748b01a1b6cf851089, type: 3}
   - {fileID: -5049687537974783880, guid: 716a8753dee9a0748b01a1b6cf851089, type: 3}
   - {fileID: -1943996745496904487, guid: 716a8753dee9a0748b01a1b6cf851089, type: 3}
-  breakEffect: {fileID: 0}
+  breakEffect: {fileID: 1663059912408188206, guid: 0367523f10e25724c8add0f155ca17e3, type: 3}
+  smokeEffect: {fileID: 7989204633775417997, guid: ed69bedf8a35124419874d436b94ec03, type: 3}
   soundGroup: Stone
   HitSound: Stone Hit
   BreakSound: Stone Break

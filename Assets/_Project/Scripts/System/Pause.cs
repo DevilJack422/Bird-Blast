@@ -11,6 +11,7 @@ public class Pause : MonoBehaviour
 
     public void PauseClick()
     {
+        if (SlowMotion.Active) return;
         pausePanel.SetActive(true);
         Time.timeScale = 0f;
     }
