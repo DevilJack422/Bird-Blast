@@ -1,5 +1,4 @@
 using System.Collections;
-using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class MusicManager : MonoBehaviour
@@ -8,6 +7,9 @@ public class MusicManager : MonoBehaviour
 
     [SerializeField] private MusicLibrary musicLibrary;
     [SerializeField] private AudioSource musicSource;
+
+    AudioClip currentTrack;
+    Coroutine fadeRoutine;
 
     void Awake()
     {
@@ -22,7 +24,14 @@ public class MusicManager : MonoBehaviour
 
     public void PlayMusic(string trackName, float fadeDuration = 0.5f)
     {
-        StartCoroutine(AnimateMusicCrossFade(musicLibrary.GetClipFromName(trackName), fadeDuration));
+        AudioClip next = musicLibrary.GetClipFromName(trackName);
+        if (next == null) return;
+
+        if (currentTrack == next && musicSource.isPlaying) return;
+
+        currentTrack = next;
+        if (fadeRoutine != null) StopCoroutine(fadeRoutine);
+        fadeRoutine = StartCoroutine(AnimateMusicCrossFade(next, fadeDuration));
     }
 
     private IEnumerator AnimateMusicCrossFade(AudioClip nextTrack, float fadeDuration = 0.5f)
