@@ -1915,8 +1915,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4293256677
+  m_fontColor: {r: 0.8962264, g: 0.8962264, b: 0.8962264, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -3390,11 +3390,11 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1015299541
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -3976037145211078143, guid: 6f4335456ceeb3249855e0eee94f8d87, type: 3}
+  m_Sprite: {fileID: -7193649854697197778, guid: 5f45d1407271044498c01c91f3c3fee0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -3413,7 +3413,7 @@ Transform:
   m_GameObject: {fileID: 1117153579}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.24, y: -0.04, z: 0}
+  m_LocalPosition: {x: 8.08, y: -0.12, z: 0}
   m_LocalScale: {x: 1.5523, y: 1.3126, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
