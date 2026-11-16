@@ -164,7 +164,7 @@ Rigidbody2D:
     serializedVersion: 2
     m_Bits: 0
   m_Interpolate: 0
-  m_SleepingMode: 1
+  m_SleepingMode: 2
   m_CollisionDetection: 0
   m_Constraints: 0
 --- !u!114 &807561405221031856
@@ -179,12 +179,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 534f4e343f7d920408f9af706e7a5af2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TntBox
+  health: 10
+  pointValue: 500
   radius: 3.3
   damage: 70
   force: 7
-  triggerImpact: 2
-  chainDelay: 0.1
-  score: 500
   explosiveEffect: {fileID: 3293571292465862545, guid: 7d7570173759ef1458b6a1119e9186bb, type: 3}
   soundGroup: Effect
   explosiveSound: Explosion
