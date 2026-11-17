@@ -7,12 +7,21 @@ using UnityEngine;
 
 public static class SaveSystem
 {
+    public struct BoardRow
+    {
+        public string name;
+        public int unlockedLevel;
+        public int stars;
+        public int score;    
+    }
+
     private static string FilePath => Path.Combine(Application.persistentDataPath, "save.json");
     private static SaveData data;
     private static SaveData Data { get { if (data == null) Load(); return data; } }
 
     public static string CurrentPlayer => Data.currentPlayer;
     public static bool HasPlayer => !string.IsNullOrEmpty(Data.currentPlayer);
+    public const int TotalLevel = 6;
 
 
     //------------------Load & Write File-----------------------------
@@ -214,5 +223,37 @@ public static class SaveSystem
         {
             Debug.LogWarning(e.Message);
         }
+    }
+
+    public static List<BoardRow> GetBoard()
+    {
+        var rows = new List<BoardRow>();
+
+        foreach (var p in Data.players)
+        {
+            int stars = 0, score = 0, highestClearedLevel = 0;
+            foreach (var l in p.levels)
+            {
+                stars += l.stars;
+                score += l.bestScore;
+                if (l.stars > 0 && l.levelIndex > highestClearedLevel) highestClearedLevel = l.levelIndex;
+            }
+            rows.Add(new BoardRow
+            {
+                name = p.name,
+                unlockedLevel = Mathf.Clamp(highestClearedLevel + 1, 1, TotalLevel),
+                stars = stars,
+                score = score
+            });
+        }
+
+        // If player didnt win any level still has a row
+        if (HasPlayer && !rows.Exists(r => string.Equals(r.name, CurrentPlayer, StringComparison.OrdinalIgnoreCase)))
+        {
+            rows.Add(new BoardRow { name = CurrentPlayer, unlockedLevel = 1});
+        }
+
+        rows.Sort((a, b) => b.score != a.score ? b.score.CompareTo(a.score) : b.stars.CompareTo(a.stars));
+        return rows;
     }
 }

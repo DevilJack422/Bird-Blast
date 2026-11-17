@@ -42,8 +42,8 @@ public class ComboSystem : MonoBehaviour
         {
             comboText.text = $"COMBO x{count}";
         }
-        comboText.color = mult >= 2f ? Color.red :Color.yellow;
-        
+        comboText.color = mult >= 2f ? Color.red : Color.yellow;
+
         return mult;
     }
 
