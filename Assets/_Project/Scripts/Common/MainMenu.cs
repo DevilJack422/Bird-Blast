@@ -1,5 +1,3 @@
-using System;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,6 +6,7 @@ public class MainMenu : MonoBehaviour
     [Header("-----Panel Control-----")]
     [SerializeField] private GameObject menuPanel;
     [SerializeField] private GameObject optionPanel;
+    [SerializeField] private GameObject leaderBoardPanel;
 
     private NameEntryUI nameEntry;
 
@@ -15,6 +14,7 @@ public class MainMenu : MonoBehaviour
     {
         menuPanel.SetActive(true);
         optionPanel.SetActive(false);
+        leaderBoardPanel.SetActive(false);
     }
 
     public void PlayClick()
@@ -36,6 +36,7 @@ public class MainMenu : MonoBehaviour
     public void BackClick()
     {
         optionPanel.SetActive(true == false);
+        leaderBoardPanel.SetActive(true == false);
         menuPanel.SetActive(true);
     }
 
@@ -48,5 +49,11 @@ public class MainMenu : MonoBehaviour
     {
         SaveSystem.ResetAll();
         SceneLoader.Reload();
+    }
+
+    public void LeaderClick()
+    {
+        menuPanel.SetActive(false);
+        leaderBoardPanel.SetActive(true);
     }
 }
