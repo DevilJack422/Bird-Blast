@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SocialPlatforms.Impl;
 
 public enum GameState { Playing, Won, Lose }
 
@@ -36,7 +37,7 @@ public class LevelManager : MonoBehaviour
     [Header("-----Slow-motion-----")]
     [SerializeField] private float slowMoScale = 0.25f;
     [SerializeField] private float slowMoHold = 1.2f;
- 
+
     private readonly Queue<Bird> queue = new();
 
     private GameState state = GameState.Playing;
@@ -48,8 +49,10 @@ public class LevelManager : MonoBehaviour
     private string loseSoundName = "Lose Sound";
 
     public GameState State => state;
-    public int BirdsLeft => birdsLeft;
     public LevelData Data => levelData;
+    public int BirdsLeft => birdsLeft;
+    public int BestScore { get; private set; }
+    public bool NewRecord { get; private set; }
 
     void Awake()
     {
@@ -63,13 +66,13 @@ public class LevelManager : MonoBehaviour
             queue.Enqueue(Instantiate(prefab, waitPoint.position, Quaternion.identity));
         }
 
-       pigsAlive = FindObjectsByType<Pig>(FindObjectsSortMode.None).Length;
+        pigsAlive = FindObjectsByType<Pig>(FindObjectsSortMode.None).Length;
 
-       slingshot.OnBirdLaunch += HandleLaunched;
-       Destructible.Destroyed += OnAnyDestroyed;
+        slingshot.OnBirdLaunch += HandleLaunched;
+        Destructible.Destroyed += OnAnyDestroyed;
 
-       RepositionQueue();
-       StartCoroutine(IntroRoutine());
+        RepositionQueue();
+        StartCoroutine(IntroRoutine());
     }
 
     void OnDestroy()
@@ -112,15 +115,21 @@ public class LevelManager : MonoBehaviour
         yield return new WaitForSeconds(winSettleDelay);
 
         ScoreManager.Instance.Add(birdsLeft * levelData.birdBonus);
-        int point = ScoreManager.Instance.Point;
-        int stars = CalcStarts(point);
+        int score = ScoreManager.Instance.Point;
+        int stars = CalcStarts(score);
 
-        SaveSystem.SaveResult(levelData.levelIndex, point, stars);
+        int previousBest = SaveSystem.GetBestScore(levelData.levelIndex);
+        SaveSystem.SaveResult(levelData.levelIndex, score, stars);
+
+        NewRecord = SaveSystem.HasPlayer && score > previousBest;
+        BestScore = Mathf.Max(score, previousBest);
+
         if (SoundManager.Instance != null && !string.IsNullOrEmpty(winSoundName))
         {
             SoundManager.Instance.PlaySound(soundId, winSoundName);
         }
-        OnLevelEnded?.Invoke(true, point, stars);
+        
+        OnLevelEnded?.Invoke(true, score, stars);
     }
 
     private int CalcStarts(int point)

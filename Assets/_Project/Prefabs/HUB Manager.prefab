@@ -124,6 +124,7 @@ MonoBehaviour:
   losePanel: {fileID: 2667113004667355680}
   loseText: {fileID: 6208889568876871978}
   scoreText: {fileID: 414244843968958999}
+  bestText: {fileID: 7204044436865246423}
   starts:
   - {fileID: 198908700413386699}
   - {fileID: 112173088623661655}
@@ -955,6 +956,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: MenuClick
       objectReference: {fileID: 0}
+    - target: {fileID: 7157124050133656859, guid: 48e404f81049f664fafe926fcf72795f, type: 3}
+      propertyPath: m_Name
+      value: BestText
+      objectReference: {fileID: 0}
+    - target: {fileID: 8534037649412671300, guid: 48e404f81049f664fafe926fcf72795f, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8609898949349222464, guid: 48e404f81049f664fafe926fcf72795f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -1028,6 +1037,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+--- !u!114 &7204044436865246423 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8534037649412671300, guid: 48e404f81049f664fafe926fcf72795f, type: 3}
+  m_PrefabInstance: {fileID: 1555736633644819347}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!1 &7723873604289429698 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9126439259484857169, guid: 48e404f81049f664fafe926fcf72795f, type: 3}

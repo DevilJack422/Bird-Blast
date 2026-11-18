@@ -8,7 +8,7 @@ public class ResultUI : MonoBehaviour
 {
     [SerializeField] private LevelManager levelManager;
     [SerializeField] private GameObject winPanel, losePanel;
-    [SerializeField] private TMP_Text loseText, scoreText;
+    [SerializeField] private TMP_Text loseText, scoreText, bestText;
     [SerializeField] private Image[] starts;
     [SerializeField] private Button nextButton;
     [SerializeField] private Color startOn = new Color(1f, 0.85f, 0.2f);
@@ -49,6 +49,20 @@ public class ResultUI : MonoBehaviour
             yield return null;
         }
         scoreText.text = point.ToString("N0");
+
+        if (bestText != null)
+        {
+            if (levelManager.NewRecord)
+            {
+                bestText.text = $"NEW HIGHEST SCORE: {levelManager.BestScore:N0}";
+                bestText.color = Color.yellow;
+            }
+            else
+            {
+                bestText.text = $"Highest Score: {levelManager.BestScore:N0}";
+                bestText.color = Color.white;
+            }
+        }
 
         // Start turnly appear, effect from small to big
         for (int i = 0; i < startCount; i++)
