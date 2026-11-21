@@ -3,6 +3,10 @@
 > **Final Course Project for FGU301 — FPT University**  
 > A 2D physics-based slingshot puzzle game inspired by *Angry Birds*, built with **Unity 6 (C#)**.
 
+[![Play on itch.io](https://img.shields.io/badge/Play%20on-itch.io-FA5C5C?style=for-the-badge&logo=itchdotio&logoColor=white)](https://takumi-ji.itch.io/bird-blast)
+
+🎮 **Play Now:** [Bird Blast by takumi_ji on itch.io](https://takumi-ji.itch.io/bird-blast)
+
 ---
 
 ## 📖 Overview
@@ -96,6 +100,11 @@ Assets/_Project/
 
 ## 🚀 Getting Started
 
+### Play via itch.io
+You can play/download the published build directly here:  
+👉 **[Bird Blast by takumi_ji](https://takumi-ji.itch.io/bird-blast)**
+
+### Run from Source (Unity Editor)
 1. Install **Unity Hub** and **Unity `6000.3.11f1`** (recommended to match the project version and avoid package compatibility issues).
 2. Clone or download this repository:
    ```bash
