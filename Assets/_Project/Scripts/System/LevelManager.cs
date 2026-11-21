@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SocialPlatforms.Impl;
 
 public enum GameState { Playing, Won, Lose }
 
@@ -204,7 +203,7 @@ public class LevelManager : MonoBehaviour
 
     private void HandleFirstHit(Bird bird)
     {
-        bird.OnFinished -= HandleFirstHit;
+        bird.OnFirstHit -= HandleFirstHit;
         if (!camBusy) StartCoroutine(PigViewRoutine());
     }
 

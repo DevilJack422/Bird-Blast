@@ -7,11 +7,19 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject menuPanel;
     [SerializeField] private GameObject optionPanel;
     [SerializeField] private GameObject leaderBoardPanel;
+    [SerializeField] private GameObject quitButton;
 
     private NameEntryUI nameEntry;
 
+
     void Start()
     {
+        if (nameEntry == null) nameEntry = FindAnyObjectByType<NameEntryUI>();
+
+#if UNITY_WEBGL && !UNITY_EDITOR
+            if (quitButton == null) quitButton.SetActive(false);
+#endif
+
         menuPanel.SetActive(true);
         optionPanel.SetActive(false);
         leaderBoardPanel.SetActive(false);
